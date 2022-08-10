@@ -1,9 +1,9 @@
 class Ship {
-    constructor(name, length, hits, isSunk){
+    constructor(name, length, hits, sunk){
         this.name = name;
         this.length = length;
         this.hits = hits;
-        this.isSunk = isSunk;
+        this.sunk = sunk;
     }
 
     hit(num) {
@@ -11,8 +11,21 @@ class Ship {
         return this.hits
     }
 
+    isSunk() {
+        const array = this.hits;
+        const result = array.every(element => {
+          if (element === "hit") {
+            return true;
+          }
+        });
+        if(result === true){
+            this.sunk = true;
+        }
+        return result;
+      }
+
     getShip(){
-        return `${this.name}, ${this.length}, ${this.hits}, ${this.isSunk}`;
+        return `${this.name}, ${this.length}, ${this.hits}, ${this.sunk}`;
     }
 }
 
@@ -22,7 +35,11 @@ let submarine = new Ship('Submarine', 3, [' ', ' ', ' '], false);
 let destroyer = new Ship('Destroyer', 3, [' ', ' ', ' '], false); 
 let patrolBoat = new Ship('Patrol Boat', 2, [' ', ' '], false);
 
-console.log(carrier.hit(2));
-console.log(battleship.getShip())
+console.log(destroyer.getShip());
+console.log(destroyer.hit(2));
+console.log(destroyer.hit(1));
+console.log(destroyer.hit(3));
+console.log(destroyer.isSunk());
+console.log(destroyer.getShip());
 
 export default Ship;
