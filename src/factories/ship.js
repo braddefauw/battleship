@@ -7,7 +7,8 @@ class Ship {
     }
 
     hit(num) {
-        this.hits.push(num);
+        this.hits[num-1] = "hit";
+        return this.hits
     }
 
     getShip(){
@@ -15,12 +16,13 @@ class Ship {
     }
 }
 
-let carrier = new Ship ('Carrier', 5, [], false);
-let battleship = new Ship('Battleship', 4, [], false);
-let submarine = new Ship('Submarine', 3, [], false);
-let destroyer = new Ship('Destroyer', 3, [], false); 
-let patrolBoat = new Ship('Patrol Boat', 2, [], false);
+let carrier = new Ship ('Carrier', 5, [' ', ' ', ' ', ' ', ' '], false);
+let battleship = new Ship('Battleship', 4, [' ', ' ', ' ', ' '], false);
+let submarine = new Ship('Submarine', 3, [' ', ' ', ' '], false);
+let destroyer = new Ship('Destroyer', 3, [' ', ' ', ' '], false); 
+let patrolBoat = new Ship('Patrol Boat', 2, [' ', ' '], false);
 
-console.log(carrier.getShip());
+console.log(carrier.hit(2));
+console.log(battleship.getShip())
 
 export default Ship;
