@@ -12,16 +12,10 @@ class Ship {
     }
 
     isSunk() {
-        const array = this.hits;
-        const result = array.every(element => {
-          if (element === "hit") {
-            return true;
-          }
-        });
-        if(result === true){
+        if(this.hits.every(element => element === "hit")) {
             this.sunk = true;
         }
-        return result;
+        return this.sunk;
       }
 
     getShip(){
