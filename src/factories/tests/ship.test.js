@@ -10,4 +10,13 @@ describe('Ship', () => {
     test('creates and initializes a ship', () => {
         expect(destroyer).toEqual({name: 'Destroyer', length: 3, hits: [' ', ' ', ' '], sunk: false})
     })
+
+    test('ship takes a hit', () => {
+        destroyer.hit(2);
+        expect(destroyer.hits[1]).toEqual("hit");
+    })
+
+    // destroyer.hit(1);
+    // destroyer.hit(3);
+    
 })
