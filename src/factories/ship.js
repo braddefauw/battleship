@@ -23,17 +23,17 @@ class Ship {
     }
 }
 
-let carrier = new Ship ('Carrier', 5, [' ', ' ', ' ', ' ', ' '], false);
-let battleship = new Ship('Battleship', 4, [' ', ' ', ' ', ' '], false);
-let submarine = new Ship('Submarine', 3, [' ', ' ', ' '], false);
-let destroyer = new Ship('Destroyer', 3, [' ', ' ', ' '], false); 
-let patrolBoat = new Ship('Patrol Boat', 2, [' ', ' '], false);
+// let carrier = new Ship ('Carrier', 5, [' ', ' ', ' ', ' ', ' '], false);
+// let battleship = new Ship('Battleship', 4, [' ', ' ', ' ', ' '], false);
+// let submarine = new Ship('Submarine', 3, [' ', ' ', ' '], false);
+// let destroyer = new Ship('Destroyer', 3, [' ', ' ', ' '], false); 
+// let patrolBoat = new Ship('Patrol Boat', 2, [' ', ' '], false);
 
-console.log(destroyer.getShip());
-console.log(destroyer.hit(2));
-console.log(destroyer.hit(1));
-console.log(destroyer.hit(3));
-console.log(destroyer.isSunk());
-console.log(destroyer.getShip());
+// console.log(destroyer.getShip());
+// destroyer.hit(2);
+// destroyer.hit(1);
+// destroyer.hit(3);
+// console.log(destroyer.isSunk());
+// console.log(destroyer.getShip());
 
-export default Ship;
+module.exports = Ship;
