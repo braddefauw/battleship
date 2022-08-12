@@ -18,7 +18,7 @@ class Ship {
             this.sunk = true;
         }
         return this.sunk;
-      }
+    }
 }
 
 module.exports = Ship;

@@ -1,12 +1,16 @@
 const Ship = require("../ship");
 
 describe('Ship', () => {
+
+    let carrier, battleship, submarine, destroyer, patrolBoat;
     
-    let carrier = new Ship ('Carrier', 5, [' ', ' ', ' ', ' ', ' '], false);
-    let battleship = new Ship('Battleship', 4, [' ', ' ', ' ', ' '], false);
-    let submarine = new Ship('Submarine', 3, [' ', ' ', ' '], false);
-    let destroyer = new Ship('Destroyer', 3, [' ', ' ', ' '], false); 
-    let patrolBoat = new Ship('Patrol Boat', 2, [' ', ' '], false);
+    beforeEach(() => {
+        carrier = new Ship ('Carrier', 5, [' ', ' ', ' ', ' ', ' '], false);
+        battleship = new Ship('Battleship', 4, [' ', ' ', ' ', ' '], false);
+        submarine = new Ship('Submarine', 3, [' ', ' ', ' '], false);
+        destroyer = new Ship('Destroyer', 3, [' ', ' ', ' '], false); 
+        patrolBoat = new Ship('Patrol Boat', 2, [' ', ' '], false);
+    })
 
     test('creates and initializes a ship', () => {
         expect(destroyer).toEqual({name: 'Destroyer', length: 3, hits: [' ', ' ', ' '], sunk: false})
@@ -28,6 +32,6 @@ describe('Ship', () => {
         destroyer.hit(1);
         destroyer.hit(1);
         destroyer.hit(1);
-        expect(destroyer.hits.length).toBe(1);
+        expect(destroyer.hits[0]).toEqual("hit");
     }) 
 })
