@@ -1,6 +1,7 @@
 const Ship = require("../ship");
 
 describe('Ship', () => {
+    
     let carrier = new Ship ('Carrier', 5, [' ', ' ', ' ', ' ', ' '], false);
     let battleship = new Ship('Battleship', 4, [' ', ' ', ' ', ' '], false);
     let submarine = new Ship('Submarine', 3, [' ', ' ', ' '], false);
@@ -16,7 +17,17 @@ describe('Ship', () => {
         expect(destroyer.hits[1]).toEqual("hit");
     })
 
-    // destroyer.hit(1);
-    // destroyer.hit(3);
-    
+    test('ship sinks', () => {
+        destroyer.hit(2);
+        destroyer.hit(1);
+        destroyer.hit(3);
+        expect(destroyer.isSunk()).toBe(true);
+    })
+
+    test('prevents a ship from being hit multiple times', () => {
+        destroyer.hit(1);
+        destroyer.hit(1);
+        destroyer.hit(1);
+        expect(destroyer.hits.length).toBe(1);
+    }) 
 })
