@@ -9,13 +9,32 @@ class Gameboard {
         this.setup();
     }
 
-    setup(){
-        for(let i = 0; i < 100; i++){
-            this.board.push(i);
+    // setup(){
+    //     for(let i = 0; i < 100; i++){
+    //         this.board.push(i);
+    //     }
+    //     console.log(this.board.length);
+    //     return this.board;
+    // }
+
+    setup() {
+        const grid = [];
+        for (let i = 0; i < this.dimension; i++) {
+            grid[i] = [i];
+            for (let j = 0; j < this.dimension; j++) {
+                grid[i][j] = [i,j]
+            }
         }
-        console.log(this.board.length);
+        this.board = grid.flat(1);
         return this.board;
     }
+
 }
 
-module.exports = Gameboard;
+let gameboard = new Gameboard;
+gameboard.setup();
+// console.log(gameboard.setup());
+console.log(gameboard.board);
+
+
+//module.exports = Gameboard;
