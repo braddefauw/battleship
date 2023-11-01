@@ -65,8 +65,10 @@ class Gameboard {
             this.missedAttacks.push({x,y})
         } else {
             // the attack hit a ship, call the ship's hit() method
-            const ship = this.board[x][y];
-            ship.hit();
+            const shipIndex = this.ships.indexOf(this.board[x][y]);
+            if(shipIndex !== -1){
+                this.ships[shipIndex].hit();
+            }
         }
     }
 
