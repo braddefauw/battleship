@@ -1,0 +1,26 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "Solution to the \"Battleship\" assignment in The Odin Project's Javascript Path.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/braddefauw/battleship.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/braddefauw/battleship/issues"
+  },
+  "homepage": "https://github.com/braddefauw/battleship#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
