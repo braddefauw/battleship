@@ -53,4 +53,11 @@ describe('Gameboard', () => {
         gameboard.receiveAttack(2, 2);
         expect(gameboard.missedAttacks).toContainEqual({x: 2, y: 2});
     });
+
+    it('should hit a ship on the board', () => {
+        const ship = new Ship(3);
+        gameboard.placeShip(ship, 0, 0, true);
+        gameboard.receiveAttack(0, 0);
+        expect(ship.hits).toBe(1)
+    })
 })
