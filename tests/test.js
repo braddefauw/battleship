@@ -1,4 +1,5 @@
 const Ship = require('../scripts/ship') //import the Ship class
+const Gameboard = require('../scripts/gameboard') // import the Gameboard class
 
 describe('Ship', () => {
     it('should create a ship with the given length and 0 hits', () => {
@@ -25,4 +26,31 @@ describe('Ship', () => {
         ship.hit();
         expect(ship.isSunk()).toBe(true);
     })
+})
+
+describe('Gameboard', () => {
+    let gameboard;
+
+    beforeEach(() => {
+        gameboard = new Gameboard;
+    })
+
+    it('should place a ship on the board', () => {
+        const ship = new Ship(3);
+        expect(gameboard.placeShip(ship, 0, 0, true)).toBe(true);
+    })
+
+    it('should reject an invalid ship placement', () => {
+        const ship1 = new Ship(4);
+        const ship2 = new Ship(3);
+
+        expect(gameboard.placeShip(ship1, 7, 7, false)).toBe(false); //out of bounds
+        expect(gameboard.placeShip(ship2, 5, 5, true)).toBe(true); // valid placement
+        expect(gameboard.placeShip(ship1, 5, 5, true)).toBe(false); //overlapping ships
+    });
+
+    it('should register a missed attack', () => {
+        gameboard.receiveAttack(2, 2);
+        expect(gameboard.missedAttacks).toContainEqual({x: 2, y: 2});
+    });
 })
