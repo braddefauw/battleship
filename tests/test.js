@@ -1,5 +1,6 @@
 const Ship = require('../scripts/ship') //import the Ship class
 const Gameboard = require('../scripts/gameboard') // import the Gameboard class
+const Player = require('../scripts/player') // import the Player class
 
 describe('Ship', () => {
     it('should create a ship with the given length and 0 hits', () => {
@@ -76,3 +77,24 @@ describe('Gameboard', () => {
         expect(gameboard.allShipsSunk()).toBe(true);
     })
 })
+
+describe('Player', () => {
+    let player;
+    let enemyGameboard;
+  
+    beforeEach(() => {
+      enemyGameboard = new Gameboard();
+      player = new Player(enemyGameboard);
+    });
+  
+    it('should make a random move on the enemy gameboard', () => {
+      // Mock the getRandomCoordinate function to ensure random moves
+      const originalGetRandomCoordinate = player.getRandomCoordinate;
+      player.getRandomCoordinate = jest.fn(() => 3);
+  
+      player.makeRandomMove();
+      expect(player.enemyGameboard.missedAttacks).toContainEqual({ x: 3, y: 3 });
+  
+      player.getRandomCoordinate = originalGetRandomCoordinate; // Restore the original function
+    });
+});
