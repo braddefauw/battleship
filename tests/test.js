@@ -88,7 +88,12 @@ describe('Player', () => {
         enemyGameboard = new Gameboard();
         player.setEnemyGameboard(enemyGameboard);
     });
-
+    
+    /* The randomness of the makeRandomMove function makes it difficult 
+    to predict the exact coordinates it will return, and that's expected because
+    it's designed to generate random, non-repeating moves. It's common for tests of 
+    random or probabilistic behavior to pass sometimes and 
+    fail sometimes due to their inherent nature. */
     it('should make a random legal move', () => {
         // call makeRandomMove to get a random attack coordinate
         const move = player.makeRandomMove();
