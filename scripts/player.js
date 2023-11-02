@@ -1,32 +1,30 @@
-const Gameboard = require('../scripts/gameboard');
-
 class Player {
-  constructor(gameboard) {
-    this.gameboard = gameboard;
-    this.enemyGameboard = new Gameboard(); // The computer's gameboard
-    this.movesHistory = []; // To keep track of moves made by the computer
-  }
-
-  // Function to make a random move on the enemy gameboard
-  makeRandomMove() {
-    const x = this.getRandomCoordinate();
-    const y = this.getRandomCoordinate();
-
-    // Check if the move has already been made
-    if (this.movesHistory.some(move => move.x === x && move.y === y)) {
-      return this.makeRandomMove(); // Try again
+    constructor(){
+        this.enemyGameboard = null;
     }
 
-    this.movesHistory.push({ x, y });
+    setEnemyGameboard(enemyGameboard){
+        this.enemyGameboard = enemyGameboard;
+    }
 
-    // Attack the enemy gameboard
-    this.enemyGameboard.receiveAttack(x, y);
-  }
+    makeRandomMove(){
+        if(!this.enemyGameboard){
+            throw new Error("Enemy gameboard not set.")
+        }
 
-  // Helper function to generate a random coordinate
-  getRandomCoordinate() {
-    return Math.floor(Math.random() * 10);
-  }
+        let x, y;
+        do{
+            // generate random coordinates for the move
+            x = Math.floor(Math.random()*10);
+            y = Math.floor(Math.random()*10);
+        } while(this.enemyGameboard.board[x][y] !== null);
+
+        // attack the enemy gameboard at the randomly chosen coordinates
+        this.enemyGameboard.receiveAttack(x, y);
+
+        //return the coordinates of the attack
+        return {x, y}
+    }
 }
 
-module.exports = Player; // Export the Player class for testing
+module.exports = Player;
