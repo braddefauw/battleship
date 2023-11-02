@@ -81,20 +81,29 @@ describe('Gameboard', () => {
 describe('Player', () => {
     let player;
     let enemyGameboard;
-  
+
     beforeEach(() => {
-      enemyGameboard = new Gameboard();
-      player = new Player(enemyGameboard);
+        player = new Player();
+        enemyGameboard = new Gameboard();
+        player.setEnemyGameboard(enemyGameboard);
     });
-  
-    it('should make a random move on the enemy gameboard', () => {
-      // Mock the getRandomCoordinate function to ensure random moves
-      const originalGetRandomCoordinate = player.getRandomCoordinate;
-      player.getRandomCoordinate = jest.fn(() => 3);
-  
-      player.makeRandomMove();
-      expect(player.enemyGameboard.missedAttacks).toContainEqual({ x: 3, y: 3 });
-  
-      player.getRandomCoordinate = originalGetRandomCoordinate; // Restore the original function
+
+    it('should make a random legal move', () => {
+        const move = player.makeRandomMove();
+        const x = move.x;
+        const y = move.y;
+
+        expect(x).toBeGreaterThanOrEqual(0);
+        expect(x).toBeLessThan(10);
+        expect(y).toBeGreaterThanOrEqual(0);
+        expect(y).toBeLessThan(10);
+
+        // attack the enemy gameboard at the randomly chosen coordinates
+        enemyGameboard.receiveAttack(x, y);
+
+        // try to make the same move again
+        const move2 = player.makeRandomMove();
+        expect(move2.x).not.toBe(x);
+        expect(move2.y).not.toBe(y)
     });
 });
