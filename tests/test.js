@@ -83,16 +83,19 @@ describe('Player', () => {
     let enemyGameboard;
 
     beforeEach(() => {
+        // create a new player and an enemy gameboard for each test
         player = new Player();
         enemyGameboard = new Gameboard();
         player.setEnemyGameboard(enemyGameboard);
     });
 
     it('should make a random legal move', () => {
+        // call makeRandomMove to get a random attack coordinate
         const move = player.makeRandomMove();
         const x = move.x;
         const y = move.y;
 
+        // ensure that the attack coordiantes are within valid range (0-9)
         expect(x).toBeGreaterThanOrEqual(0);
         expect(x).toBeLessThan(10);
         expect(y).toBeGreaterThanOrEqual(0);
@@ -101,7 +104,7 @@ describe('Player', () => {
         // attack the enemy gameboard at the randomly chosen coordinates
         enemyGameboard.receiveAttack(x, y);
 
-        // try to make the same move again
+        // try to make the same move again to confirm that it's different
         const move2 = player.makeRandomMove();
         expect(move2.x).not.toBe(x);
         expect(move2.y).not.toBe(y)
