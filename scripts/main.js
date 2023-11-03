@@ -55,3 +55,5 @@ function gameLoop() {
         currentGameboard = temp;
     }
 }
+
+gameLoop();
