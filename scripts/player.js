@@ -1,4 +1,4 @@
-class Player {
+export class Player {
     constructor(){
         this.enemyGameboard = null; // initialize the enemy game board
     }

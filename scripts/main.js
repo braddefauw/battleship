@@ -1,8 +1,69 @@
+console.log("this is working");
+
+import { Ship } from '../scripts/ship'
+import { Gameboard } from '../scripts/gameboard'
+import { Player } from '../scripts/player'
+
 const readline = require('readline')
 
-const Ship = require('../scripts/ship') //import the Ship class
-const Gameboard = require('../scripts/gameboard') // import the Gameboard class
-const Player = require('../scripts/player') // import the Player class
+const playerBoardElement = document.getElementById('player-board');
+const enemyBoardElement = document.getElementById('enemy-board');
+const messageAreaElement = document.getElementById('message-area')
+
+// create game boards and set up ships
+const { player, playerGameboard, computerGameboard } = setupGame();
+
+// render the game boards
+renderGameboard(playerGameboard, playerBoardElement, true);
+renderGameboard(computerGameboard, enemyBoardElement, false);
+
+function renderGameboard(gameboard, boardElement, isPlayerBoard){
+    boardElement.innerHTML = '';
+    for(let row = 0; row < 10; row++){
+        for(let col = 0; col < 10; col++){
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+
+            if(!isPlayerBoard){
+                // add a click event handler for the enemy game board
+                cell.addEventListener('click', () => handleAttack(row, col));
+            }
+
+            // customize the display based on the gameboard state
+            if(gameboard.board[row][col] !== null){
+                cell.style.backgroundColor = 'gray'; //represent ships on the board
+            }
+
+            boardElement.appendChild(cell);
+        }
+    }
+}
+
+function handleAttack(row, col){
+    //handle the player's attack on the enemy game board
+    playerGameboard.receiveAttack(row, col);
+    renderGameboard(playerGameboard, playerBoardElement, true);
+
+    // check if game is over
+    if(playerGameboard.allShipsSunk()){
+        showMessage('Computer Wins!');
+        return;
+    }
+
+    // computer's turn
+    const computerMove = player.makeRandomMove();
+    computerGameboard.receiveAttack(computerMove.x, computerMove.y);
+    renderGameboard(computerGameboard, enemyBoardElement, false);
+
+    // check if game is over
+    if(computerGameboard.allShipsSunk()){
+        showMessage('Player wins!')
+    }
+}
+
+function showMessage(message){
+    messageAreaElement.textContent = message;
+}
 
 const rl = readline.createInterface({
     input: process.stdin,

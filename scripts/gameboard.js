@@ -1,4 +1,4 @@
-class Gameboard {
+export class Gameboard {
     constructor() {
         // A 10x10 grid for the game board
         this.board = new Array(10).fill(null).map(() => new Array(10).fill(null));

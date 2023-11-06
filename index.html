@@ -8,9 +8,16 @@
     <link rel="stylesheet" href="styles.css" type="text/css">
 </head>
 <body>
-    <div id="player-gameboard"></div>
-    <div id="computer-gameboard"></div>
-    <button id="start-button">Start Game</button>
-    <script src="main.js"></script>
+    <h1>Battleship Game</h1>
+    <div id="player-gameboard">
+        <h2>Your Gameboard</h2>
+        <div id="player-board" class="board"></div>
+    </div>
+    <div id="computer-gameboard">
+        <h2>Enemy Gameboard</h2>
+        <div id="enemy-board" class="board"></div>
+    </div>
+    <div id="message-area"></div>
+    <script type="module" src="scripts/main.js"></script>
 </body>
 </html>
