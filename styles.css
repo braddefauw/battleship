@@ -1,17 +1,56 @@
-.board {
-    display: grid;
-    grid-template-columns: repeat(10, 40px);
-    grid-template-rows: repeat(10, 40px);
-    grid-gap: 2px;
+/* Game board container */
+#game-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+    width: 600px; /* Adjust the width as needed */
 }
 
+/* Game board */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 2px;
+    width: 280px; /* Adjust the width as needed */
+    height: 280px; /* Adjust the height as needed */
+    border: 1px solid #000;
+}
+
+/* Game board cells */
 .cell {
-    width: 40px;
-    height: 40px;
-    background-color: lightblue;
-    border: 1px solid #ccc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #8db8cc;
+    border: 1px solid #fff;
+}
+
+/* Styling for hits */
+.cell.hit {
+    background-color: #d9534f; /* Red for hits */
+}
+
+/* Styling for sunk ships */
+.cell.sunk {
+    background-color: #5cb85c; /* Green for sunk ships */
+}
+
+/* Styling for missed attacks */
+.cell.miss {
+    background-color: #337ab7; /* Blue for missed attacks */
+}
+
+/* Message and start button styles */
+#message {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#start-button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #337ab7; /* Blue button */
+    color: #fff;
+    border: none;
     cursor: pointer;
 }
