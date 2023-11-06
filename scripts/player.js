@@ -26,5 +26,3 @@ export class Player {
         return {x, y}
     }
 }
-
-module.exports = Player; //export the player class for testing

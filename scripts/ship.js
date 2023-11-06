@@ -12,5 +12,3 @@ export class Ship {
         return this.hits === this.length;
     }
 }
-
-module.exports = Ship //export the Ship class for testing

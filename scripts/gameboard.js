@@ -77,5 +77,3 @@ export class Gameboard {
         return this.ships.every(ship => ship.isSunk());
     }
 }
-
-module.exports = Gameboard; // export the Gameboard class for testing
