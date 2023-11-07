@@ -25,12 +25,57 @@ enemyGameboard.placeShip(enemyShip1, 2, 3, false);
 domModule.renderBoard(playerGameboard.board, true);
 domModule.renderBoard(enemyGameboard.board, false);
 
+// start the game when the "Start Game" button is clicked
+domModule.setStartButtonState(true);
+domModule.displayMessage(`Click "Start Game" to begin.`)
+
 // Start the game loop
 function startGame() {
-  // Implement your game loop logic here
-  // For example, alternating player turns and handling attacks
+  // disable the "Start Game" button to prevent multiple game starts
+  domModule.setStartButtonState(false);
+
+  // initialize game variables and states
+  let playerTurn = true; //player starts
+
+  //main game loop
+  function gameLoop(){
+    if(playerTurn){
+        // player's turn
+        domModule.displayMessage("Your turn. Click on the enemy board to attack.")
+        // Implement player interaction with the enemy board
+        // Update the enemyGameboard based on player's actions
+        // Check for game over conditions
+        // Toggle playerTurn
+    }else{
+        // Computer's turn
+        domModule.displayMessage(`Computer's turn...`);
+        // Implement computer's AI to make a move on the player's board
+        // Update the playerGameboard based on the computer's actions
+        // Check for game over conditions
+        // Toggle playerTurn
+    }
+
+    //check for game over conditions and end the game if necessary
+    if(isGameOver()){
+        // display the game result
+        // enable the start game button to restart
+    }else{
+        //continue the game lopo with the next turn
+        setTimeout(gameLoop, 1000); // delay for better UX
+    }
+  }
+
+  // start the game loop
+  gameLoop();
 }
 
-// Initialize the game
+// add an event listener to the "start game" button
 domModule.setStartButtonState(true);
-domModule.displayMessage('Click "Start Game" to begin.');
+document.getElementById("start-button").addEventListener("click", () => {
+    startGame();
+})
+
+// function to check if the game is over
+function isGameOver(){
+    return enemyGameboard.allShipsSunk() || playerGameboard.allShipsSunk();
+}
