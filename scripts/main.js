@@ -1,4 +1,4 @@
-console.log("test")
+console.log("this is working")
 
 // Import your classes (Ship, Gameboard, Player) and the dom module here
 import {Ship} from './ship.js';
@@ -42,10 +42,39 @@ function startGame() {
     if(playerTurn){
         // player's turn
         domModule.displayMessage("Your turn. Click on the enemy board to attack.")
-        // Implement player interaction with the enemy board
-        // Update the enemyGameboard based on player's actions
-        // Check for game over conditions
-        // Toggle playerTurn
+        // Add a click event listener to the enemy game board
+        enemyBoard.addEventListener("click", handlePlayerAttack)
+        function handlePlayerAttack(event){
+            console.log("clicking board");
+            // calculate the cell coordinates based on the click event
+            const cell = event.target;
+            const x = cell.cellIndex; //get the cell's column index
+            const y = cell.parentElement.rowIndex; //get the cell's row index
+
+            // check if the attack is valid (e.g., not attacking the same cell again)
+            if(isValidAttack(x, y,)){
+                //make an attack on the enemy gameboard
+                enemyGameboard.receiveAttack(x, y);
+
+                //render the updated enemy game board
+                domModule.renderBoard(enemyGameboard.board, false);
+
+                //check for game over conditions
+                if(isGameOver()){
+                    //display the game result
+                    // enable the start game button to restart
+                } else {
+                    // toggle player turn
+                    playerTurn = !playerTurn;
+
+                    // remove the click event listener to prevent further player moves
+                    enemyGameboard.removeEventListener("click", handlePlayerAttack);
+
+                    //continue the game loop with the next turn (computer's turn)
+                    setTimeout(gameLoop, 1000); //delay for better UX
+                }
+            }
+        }
     }else{
         // Computer's turn
         domModule.displayMessage(`Computer's turn...`);
