@@ -1,3 +1,5 @@
+import { startGame } from "./main.js";
+
 // DOM module for handling UI interactions
 const domModule = (function () {
     // Cache DOM elements

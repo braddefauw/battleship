@@ -108,3 +108,5 @@ document.getElementById("start-button").addEventListener("click", () => {
 function isGameOver(){
     return enemyGameboard.allShipsSunk() || playerGameboard.allShipsSunk();
 }
+
+export { startGame }
