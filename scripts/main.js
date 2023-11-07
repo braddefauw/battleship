@@ -6,6 +6,9 @@ import {Gameboard} from './gameboard.js'
 import {Player} from './player.js'
 import domModule from './dom.js';
 
+const enemyBoard = document.getElementById('enemy-board');
+const startButton = document.getElementById('start-button');
+
 // Create your game objects
 const playerGameboard = new Gameboard();
 const enemyGameboard = new Gameboard();
@@ -26,11 +29,15 @@ domModule.renderBoard(playerGameboard.board, true);
 domModule.renderBoard(enemyGameboard.board, false);
 
 // start the game when the "Start Game" button is clicked
-domModule.setStartButtonState(true);
-domModule.displayMessage(`Click "Start Game" to begin.`)
+
+startButton.addEventListener("click", () => {
+    startButton.disabled = true;
+    console.log("click");
+    startGame(enemyBoard)
+})
 
 // Start the game loop
-function startGame() {
+function startGame(enemyBoard) {
   // disable the "Start Game" button to prevent multiple game starts
   domModule.setStartButtonState(false);
 
@@ -45,7 +52,6 @@ function startGame() {
         // Add a click event listener to the enemy game board
         enemyBoard.addEventListener("click", handlePlayerAttack)
         function handlePlayerAttack(event){
-            console.log("clicking board");
             // calculate the cell coordinates based on the click event
             const cell = event.target;
             const x = cell.cellIndex; //get the cell's column index
@@ -97,12 +103,6 @@ function startGame() {
   // start the game loop
   gameLoop();
 }
-
-// add an event listener to the "start game" button
-domModule.setStartButtonState(true);
-document.getElementById("start-button").addEventListener("click", () => {
-    startGame();
-})
 
 // function to check if the game is over
 function isGameOver(){

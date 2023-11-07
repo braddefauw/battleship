@@ -41,12 +41,6 @@ const domModule = (function () {
       startButton.disabled = !enabled;
     }
   
-    // Add event listener to the Start Game button
-    startButton.addEventListener('click', () => {
-      startButton.disabled = true;
-      startGame();
-    });
-  
     return {
       renderBoard,
       displayMessage,
