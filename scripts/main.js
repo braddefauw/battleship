@@ -32,7 +32,6 @@ domModule.renderBoard(enemyGameboard.board, false);
 
 startButton.addEventListener("click", () => {
     startButton.disabled = true;
-    console.log("click");
     startGame(enemyBoard)
 })
 
@@ -44,59 +43,64 @@ function startGame(enemyBoard) {
   // initialize game variables and states
   let playerTurn = true; //player starts
 
+  let gameOver=false;
+
   //main game loop
   function gameLoop(){
     if(playerTurn){
         // player's turn
-        domModule.displayMessage("Your turn. Click on the enemy board to attack.")
-        // Add a click event listener to the enemy game board
-        enemyBoard.addEventListener("click", handlePlayerAttack)
-        function handlePlayerAttack(event){
-            // calculate the cell coordinates based on the click event
-            const cell = event.target;
-            const x = cell.cellIndex; //get the cell's column index
-            const y = cell.parentElement.rowIndex; //get the cell's row index
+        domModule.displayMessage('Your turn. Click on the enemy board to attack.')
 
-            // check if the attack is valid (e.g., not attacking the same cell again)
-            if(isValidAttack(x, y,)){
-                //make an attack on the enemy gameboard
-                enemyGameboard.receiveAttack(x, y);
+        // player's attack logic
+        const x = // calculate x coordinte based on click event
+        const y = // calculate y coordinate based on the click event
 
-                //render the updated enemy game board
-                domModule.renderBoard(enemyGameboard.board, false);
+        //check if the attack is valid
+        if(isValidAttack(x, y)){
+            //make an attack on the enemy gameboard
+            enemyGameboard.receiveAttack(x, y);
 
-                //check for game over conditions
-                if(isGameOver()){
-                    //display the game result
-                    // enable the start game button to restart
-                } else {
-                    // toggle player turn
-                    playerTurn = !playerTurn;
+            // render the updated enemy game board
+            domModule.renderBoard(enemyGameboard.board, false)
 
-                    // remove the click event listener to prevent further player moves
-                    enemyGameboard.removeEventListener("click", handlePlayerAttack);
-
-                    //continue the game loop with the next turn (computer's turn)
-                    setTimeout(gameLoop, 1000); //delay for better UX
-                }
+            //check for game over conditions
+            if(enemyGameboard.allShipsSunk()){
+                gameOver = true;
+                // display the game result
+                domModule.displayMessage('Congratulations! You win.')
             }
+
+            // toggle player turn
+            playerTurn = !playerTurn
         }
     }else{
-        // Computer's turn
-        domModule.displayMessage(`Computer's turn...`);
-        // Implement computer's AI to make a move on the player's board
-        // Update the playerGameboard based on the computer's actions
-        // Check for game over conditions
-        // Toggle playerTurn
-    }
+        // Computer's turn (AI logic)
+        if(!gameOver){
+            // implement AI logic to choose the player's board coordinates for the attack
+            const x = // AI logic for x coordinate
+            const y = // AI logic to calculate y coordinate
 
-    //check for game over conditions and end the game if necessary
-    if(isGameOver()){
-        // display the game result
-        // enable the start game button to restart
-    }else{
-        //continue the game lopo with the next turn
-        setTimeout(gameLoop, 1000); // delay for better UX
+            // make an attack on the player's game board
+            playerGameboard.receiveAttack(x, y)
+
+            // render the updated player game board
+            domModule.renderBoard(playerGameboard.board, true);
+
+            // check for game over conditions
+            if(playerGameboard.allShipsSunk()){
+                gameOver = true;
+                // display the game result
+                domModule.displayMessage('Computer wins. Try again!')
+            }
+
+            // toggle player turn
+            playerTurn = !playerTurn
+
+            if(!gameOver){
+                // continue the game loop with the next turn (player's turn)
+                setTimeout(gameLoop, 1000) // delay for better UX
+            }
+        }
     }
   }
 
@@ -105,7 +109,7 @@ function startGame(enemyBoard) {
 }
 
 // function to check if the game is over
-function isGameOver(){
+function gameOver(){
     return enemyGameboard.allShipsSunk() || playerGameboard.allShipsSunk();
 }
 
