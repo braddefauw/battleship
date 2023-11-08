@@ -93,28 +93,30 @@ function startGame(enemyBoard) {
         // Computer's turn (AI logic)
         if(!gameOver){
             // implement AI logic to choose the player's board coordinates for the attack
-            const x = // AI logic for x coordinate
-            const y = // AI logic to calculate y coordinate
+            const x = getRandomCoordinate()
+            const y = getRandomCoordinate();
 
-            // make an attack on the player's game board
-            playerGameboard.receiveAttack(x, y)
+            if(isValidAttack(x, y)){
+                // make an attack on the player's game board
+                playerGameboard.receiveAttack(x, y)
 
-            // render the updated player game board
-            domModule.renderBoard(playerGameboard.board, true);
+                // render the updated player game board
+                domModule.renderBoard(playerGameboard.board, true);
 
-            // check for game over conditions
-            if(playerGameboard.allShipsSunk()){
-                gameOver = true;
-                // display the game result
-                domModule.displayMessage('Computer wins. Try again!')
-            }
+                // check for game over conditions
+                if(playerGameboard.allShipsSunk()){
+                    gameOver = true;
+                    // display the game result
+                    domModule.displayMessage('Computer wins. Try again!')
+                }
 
-            // toggle player turn
-            playerTurn = !playerTurn
+                // toggle player turn
+                playerTurn = !playerTurn
 
-            if(!gameOver){
-                // continue the game loop with the next turn (player's turn)
-                setTimeout(gameLoop, 1000) // delay for better UX
+                if(!gameOver){
+                    // continue the game loop with the next turn (player's turn)
+                    setTimeout(gameLoop, 1000) // delay for better UX
+                }
             }
         }
     }
@@ -122,6 +124,11 @@ function startGame(enemyBoard) {
 
   // start the game loop
   gameLoop();
+}
+
+// function to get a random coordinate within the board's bounds
+function getRandomCoordinate(){
+    return Math.floor(Math.random() * 10)
 }
 
 export { startGame }
