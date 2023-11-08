@@ -68,7 +68,7 @@ function startGame(enemyBoard) {
             const y = cell.parentElement.rowIndex; //get the cell's row index
 
             //check if the attack is valid
-            if(isValidAttack(x, y)){
+            if(enemyGameboard.isValidAttack(x, y)){
                 //make an attack on the enemy gameboard
                 enemyGameboard.receiveAttack(x, y);
 

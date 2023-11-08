@@ -58,6 +58,15 @@ export class Gameboard {
         return true; // ship placement is valid
     }
 
+    //function to check if an attack is valid (e.g. not attacking the same coordinate twice)
+    isValidAttack(x, y){
+        if(x < 0 || x > 10 || y < 0 || y > 10){
+            return false; // out of bounds
+        }
+
+        return this.board[x][y] === null;
+    }
+
     // function to receive an attack at the specified coordinates
     receiveAttack(x, y){
         if(this.board[x][y] === null){
