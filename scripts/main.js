@@ -108,9 +108,4 @@ function startGame(enemyBoard) {
   gameLoop();
 }
 
-// function to check if the game is over
-function gameOver(){
-    return enemyGameboard.allShipsSunk() || playerGameboard.allShipsSunk();
-}
-
 export { startGame }
