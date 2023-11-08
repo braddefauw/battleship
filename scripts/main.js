@@ -51,27 +51,43 @@ function startGame(enemyBoard) {
         // player's turn
         domModule.displayMessage('Your turn. Click on the enemy board to attack.')
 
-        // player's attack logic
-        const x = // calculate x coordinte based on click event
-        const y = // calculate y coordinate based on the click event
+        // define a variable to track if the player has made an attack in this round
+        let hasAttacked = false;
 
-        //check if the attack is valid
-        if(isValidAttack(x, y)){
-            //make an attack on the enemy gameboard
-            enemyGameboard.receiveAttack(x, y);
+        enemyBoard.addEventListener('click', handlePlayerAttack);
 
-            // render the updated enemy game board
-            domModule.renderBoard(enemyGameboard.board, false)
-
-            //check for game over conditions
-            if(enemyGameboard.allShipsSunk()){
-                gameOver = true;
-                // display the game result
-                domModule.displayMessage('Congratulations! You win.')
+        function handlePlayerAttack(event){
+            if(hasAttacked){
+                // player already attacked in this turn
+                return;
             }
 
-            // toggle player turn
-            playerTurn = !playerTurn
+            // player's attack logic
+            const cell = event.target;
+            const x = cell.cellIndex; //get the cell's column index
+            const y = cell.parentElement.rowIndex; //get the cell's row index
+
+            //check if the attack is valid
+            if(isValidAttack(x, y)){
+                //make an attack on the enemy gameboard
+                enemyGameboard.receiveAttack(x, y);
+
+                // render the updated enemy game board
+                domModule.renderBoard(enemyGameboard.board, false)
+
+                //check for game over conditions
+                if(enemyGameboard.allShipsSunk()){
+                    gameOver = true;
+                    // display the game result
+                    domModule.displayMessage('Congratulations! You win.')
+                }
+
+                // toggle player turn
+                playerTurn = !playerTurn
+
+                //mark that the player has attacked in this turn
+                hasAttacked = true;
+            }
         }
     }else{
         // Computer's turn (AI logic)
