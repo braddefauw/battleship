@@ -2,6 +2,13 @@ export class Gameboard {
     constructor() {
         // A 10x10 grid for the game board
         this.board = new Array(10).fill(null).map(() => new Array(10).fill(null));
+        // intialize all cells to null
+        for (let i = 0; i < 10; i++){
+            for(let j = 0; j < 10; j++){
+                this.board[i][j] = null;
+            }
+        }
+
         // initialize an empty array to store the ships placed on the board
         this.ships = [];
         // initialize an empty array to store the coordinates of missed attacks
@@ -63,7 +70,7 @@ export class Gameboard {
         if(x < 0 || x > 10 || y < 0 || y > 10){
             return false; // out of bounds
         }
-
+        console.log(x, y)
         return this.board[x][y] === null;
     }
 
