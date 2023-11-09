@@ -14,20 +14,26 @@ const domModule = (function () {
       boardElement.innerHTML = ''; // Clear the board
   
       for (let row = 0; row < 10; row++) {
+        const rowElement = document.createElement('tr'); // Create a table row
+    
         for (let col = 0; col < 10; col++) {
-          const cell = document.createElement('div');
+          const cell = document.createElement('td'); // Create a table data cell
           cell.className = 'cell';
+    
           if (board[row][col] !== null) {
             if (board[row][col].isSunk()) {
               cell.classList.add('sunk');
             } else {
               cell.classList.add('hit');
             }
-          } else if (board[row][col] === null) {
+          } else {
             cell.classList.add('miss');
           }
-          boardElement.appendChild(cell);
+    
+          rowElement.appendChild(cell);
         }
+    
+        boardElement.appendChild(rowElement);
       }
     }
   
