@@ -36,3 +36,18 @@
   background-color: lightblue;
 }
 
+/* Message and start button styles */
+#message {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#start-button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #337ab7; /* Blue button */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
