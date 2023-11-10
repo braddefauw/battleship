@@ -70,7 +70,6 @@ export class Gameboard {
         if(x < 0 || x > 10 || y < 0 || y > 10){
             return false; // out of bounds
         }
-        console.log(x, y)
         return this.board[x][y] === null;
     }
 

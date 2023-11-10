@@ -65,7 +65,7 @@ function startGame(enemyBoard) {
             // player's attack logic
             const cell = event.target;
             const x = cell.cellIndex; //get the cell's column index
-            const y = cell.parentElement.rowIndex; //get the cell's row index
+            const y = cell.parentNode.rowIndex; //get the cell's row index
 
             console.log(x, y);
 
