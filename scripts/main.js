@@ -67,12 +67,10 @@ function startGame(enemyBoard) {
             const x = cell.cellIndex; //get the cell's column index
             const y = cell.parentNode.rowIndex; //get the cell's row index
 
-            console.log(x, y);
-
             //check if the attack is valid
             if(enemyGameboard.isValidAttack(x, y)){
                 // Check if the attack hit a ship
-                if (enemyGameboard.board[x][y] !== null) {
+                if (cell.classList.contains('hit')) {
                     // Hit
                     alert('You hit an enemy ship!');
                 } else {
@@ -92,12 +90,8 @@ function startGame(enemyBoard) {
                     domModule.displayMessage('Congratulations! You win.')
                 }
 
-                console.log(playerTurn)
-
                 // toggle player turn
                 playerTurn = !playerTurn
-
-                console.log(playerTurn)
 
                 //mark that the player has attacked in this turn
                 hasAttacked = true;
