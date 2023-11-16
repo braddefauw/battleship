@@ -84,11 +84,20 @@ function startGame(enemyBoard) {
                     domModule.displayMessage('Congratulations! You win.')
                 }
 
+                console.log(playerTurn)
+
                 // toggle player turn
                 playerTurn = !playerTurn
 
+                console.log(playerTurn)
+
                 //mark that the player has attacked in this turn
                 hasAttacked = true;
+
+                if(!gameOver){
+                    // continue the game loop with the next turn (player's turn)
+                    setTimeout(gameLoop, 1000) // delay for better UX
+                }
             }
         }
     }else{
@@ -98,7 +107,9 @@ function startGame(enemyBoard) {
             const x = getRandomCoordinate()
             const y = getRandomCoordinate();
 
-            if(isValidAttack(x, y)){
+            console.log(x, y)
+
+            if(enemyGameboard.isValidAttack(x, y)){
                 // make an attack on the player's game board
                 playerGameboard.receiveAttack(x, y)
 

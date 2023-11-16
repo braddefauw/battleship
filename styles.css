@@ -11,7 +11,7 @@
 #enemy-board {
   border-collapse: collapse;
   margin-top: 20px;
-  padding-right: 1rem;
+  margin: 0.5rem;
 }
 
 /* Style for individual cells */
