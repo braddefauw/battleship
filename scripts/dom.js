@@ -21,10 +21,13 @@ const domModule = (function () {
           cell.className = 'cell';
     
           if (board[row][col] !== null) {
+            if( isPlayer || isPlayer == false && board[row][col].isSunk() === false){
+              cell.classList.add('ship');
+            }
             if (board[row][col].isSunk()) {
               cell.classList.add('sunk');
-            } else {
-              cell.classList.add('occupied');
+            } else if (board[row][col].isHit()) {
+              cell.classList.add('hit');
             }
           } else {
             cell.classList.add('miss');
