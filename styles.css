@@ -21,8 +21,12 @@
   border: 1px solid #000;
 }
 
+#enemy-board .ship {
+  background-color: lightblue;
+}
+
 /* Style for hit cells */
-.cell.hit {
+#enemy-board .ship.hit {
   background-color: red;
 }
 
