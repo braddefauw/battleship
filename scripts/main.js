@@ -99,6 +99,7 @@ function startGame(enemyBoard) {
                 if(!gameOver){
                     // continue the game loop with the next turn (player's turn)
                     setTimeout(gameLoop, 1000) // delay for better UX
+                    domModule.displayMessage('Computer turn. Please wait.')
                 }
             }
         }
@@ -131,6 +132,7 @@ function startGame(enemyBoard) {
                 if(!gameOver){
                     // continue the game loop with the next turn (player's turn)
                     setTimeout(gameLoop, 1000) // delay for better UX
+                    domModule.displayMessage('Your turn. Click on the enemy board to attack.')
                 }
             }
         }
