@@ -70,9 +70,11 @@ function startGame(enemyBoard) {
             //check if the attack is valid
             if(enemyGameboard.isValidAttack(x, y)){
                 // Check if the attack hit a ship
-                if (cell.classList.contains('hit')) {
+                console.log(x, y, enemyGameboard.board[y][x])
+                if (enemyGameboard.board[y][x] !== null) {
                     // Hit
                     alert('You hit an enemy ship!');
+                    cell.classList.add('hit');
                 } else {
                     // Miss
                     alert('You missed!');
