@@ -27,7 +27,7 @@ const domModule = (function () {
             if (board[row][col].isSunk()) {
               cell.classList.add('sunk');
             } else if (board[row][col].isHit()) {
-              cell.classList.add('hit');
+              cell.classList.add('test');
             }
           } else {
             cell.classList.add('miss');

@@ -19,10 +19,11 @@
   width: 30px;
   height: 30px;
   border: 1px solid #000;
+  background-color: lightblue;
 }
 
-#enemy-board .ship {
-  background-color: lightblue;
+#player-board .ship {
+  background-color: blue;
 }
 
 /* Style for hit cells */

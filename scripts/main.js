@@ -74,8 +74,8 @@ function startGame(enemyBoard) {
                     // Hit
                     alert('You hit an enemy ship!');
                     enemyGameboard.board[y][x].hits++
-                    console.log(enemyGameboard.board[y][x].hits)
                     cell.classList.add('hit');
+                    console.log(cell, enemyGameboard.board[y][x])
                 } else {
                     // Miss
                     alert('You missed!');
